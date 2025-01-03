@@ -1,2 +1,21 @@
 server:
   port: 9090
+spring:
+  datasource:
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/heartsound?useSSL=false&useUnicode=true&characterEncoding=UTF-8
+      username: root
+      password: sl1056160782
+      initial-size: 5         # 初始化连接数
+      max-active: 20          # 最大连接数
+      min-idle: 5             # 最小空闲连接数
+      max-wait: 60000         # 最大等待时间（毫秒）
+      time-between-eviction-runs-millis: 60000 # 检测空闲连接间隔时间
+      min-evictable-idle-time-millis: 300000   # 最小空闲时间
+      validation-query: SELECT 1               # 验证 SQL
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      pool-prepared-statements: true           # 开启 PSCache
+      max-pool-prepared-statement-per-connection-size: 20

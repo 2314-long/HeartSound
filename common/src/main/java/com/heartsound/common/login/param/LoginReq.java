@@ -2,6 +2,8 @@ package com.heartsound.common.login.param;
 
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.validation.constraints.NotEmpty;
 
@@ -11,6 +13,8 @@ import javax.validation.constraints.NotEmpty;
  * @author sl
  */
 @Data
+@Getter
+@Setter
 public class LoginReq {
 
     /**

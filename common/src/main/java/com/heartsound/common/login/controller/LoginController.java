@@ -2,7 +2,9 @@ package com.heartsound.common.login.controller;
 
 import com.heartsound.common.login.param.LoginReq;
 import com.heartsound.common.login.pojo.AccessToken;
+import com.heartsound.common.login.service.LoginService;
 import com.heartsound.common.utils.R;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,6 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class LoginController {
+
+    @Autowired
+    private LoginService loginService;
     @RequestMapping("/hello")
     public String test(){
         return "hello";
@@ -17,7 +22,7 @@ public class LoginController {
 
     @PostMapping("/login")
     public R<AccessToken> login(@RequestBody LoginReq loginReq){
-        return null;
+        return loginService.login(loginReq);
     }
 
 }

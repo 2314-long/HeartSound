@@ -1,4 +1,4 @@
-package com.heartsound.common.user;
+package com.heartsound.common.user.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.heartsound.common.user.pojo.UserEntity;
