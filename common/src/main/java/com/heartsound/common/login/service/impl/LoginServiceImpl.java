@@ -11,6 +11,7 @@ import com.heartsound.common.user.pojo.UserEntity;
 import com.heartsound.common.utils.JwtUtil;
 import com.heartsound.common.utils.PasswordManager;
 import com.heartsound.common.utils.R;
+import com.heartsound.common.utils.TimeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,13 +29,17 @@ public class LoginServiceImpl implements LoginService {
         // 验证
         AuthException.throwBy(userEntity==null, AuthRCode.USERNAME_OR_PWD_FAULT);
         AuthException.throwBy(userEntity.getDelTime() == null || !userEntity.getDelTime().equals(0L), AuthRCode.USER_NOT_ENABLED);
-        AuthException.throwBy(PasswordManager.hashPassword(loginReq.getPassword()).equals(userEntity.getPassword()), AuthRCode.USERNAME_OR_PWD_FAULT);
+        AuthException.throwBy(!PasswordManager.verifyPassword(loginReq.getPassword(), userEntity.getPassword()), AuthRCode.USERNAME_OR_PWD_FAULT);
         // 获取token
-        String token = JwtUtil.generateToken(loginReq.getUsername());
+        long expirationTime = 1000 * 60 * 60; // 1 小时有效期
+        String token = JwtUtil.generateToken(loginReq.getUsername(),expirationTime);
+        accessToken.setDuration((int)expirationTime/1000);
         accessToken.setToken(token);
         accessToken.setUserId(userEntity.getId());
         accessToken.setMultiPlaceLogin(true);
         accessToken.setRequestRefresh(true);
+        accessToken.setExpire(System.currentTimeMillis()+expirationTime);
+        accessToken.setLoginTime(TimeUtil.getCurrentTimeString());
         return R.ok(accessToken);
     }
 }

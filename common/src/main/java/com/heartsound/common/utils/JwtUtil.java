@@ -10,11 +10,11 @@ import java.util.Date;
 public class JwtUtil {
 
     // 定义签名密钥
-    private static final String SECRET_KEY = "mySecretKey12345";
+    private static final String SECRET_KEY = "mySecretKey12345songlong090423141056160782heartsound";
 
     // 生成 Token
-    public static String generateToken(String username) {
-        long expirationTime = 1000 * 60 * 60; // 1 小时有效期
+    public static String generateToken(String username, long expirationTime) {
+//        long expirationTime = 1000 * 60 * 60; // 1 小时有效期
         return Jwts.builder()
                 .setSubject(username) // 设置主题（用户名）
                 .setIssuedAt(new Date()) // 签发时间
@@ -36,9 +36,5 @@ public class JwtUtil {
             throw new RuntimeException("Invalid Token");
         }
     }
-//    public static void main(String[] args) {
-//        String token = generateToken("user123");
-//        System.out.println("Generated Token: " + token);
-//    }
 }
 
