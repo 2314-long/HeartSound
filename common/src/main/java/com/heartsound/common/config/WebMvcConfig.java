@@ -68,7 +68,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 .addPathPatterns("/**") // 拦截所有路径
                 .excludePathPatterns(
                         "/login",     // 登录接口
-                        "/register",  // 注册接口
+//                        "/check",  // 检查token接口
                         "/public/**", // 公共资源
                         "/error"      // 错误页面
                 );
