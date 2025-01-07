@@ -36,5 +36,15 @@ public class JwtUtil {
             throw new RuntimeException("Invalid Token");
         }
     }
+
+    // 验证 Token
+    public static boolean validateToken(String token) {
+        try {
+            parseToken(token);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
 }
 

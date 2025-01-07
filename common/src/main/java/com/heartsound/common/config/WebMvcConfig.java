@@ -1,5 +1,6 @@
 package com.heartsound.common.config;
 
+import com.heartsound.common.interceptor.JwtInterceptor;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -8,6 +9,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -58,5 +60,17 @@ public class WebMvcConfig implements WebMvcConfigurer {
         // 过滤器优先级
         bean.setOrder(Integer.MIN_VALUE);
         return bean;
+    }
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(new JwtInterceptor())
+                .addPathPatterns("/**") // 拦截所有路径
+                .excludePathPatterns(
+                        "/login",     // 登录接口
+                        "/register",  // 注册接口
+                        "/public/**", // 公共资源
+                        "/error"      // 错误页面
+                );
     }
 }
