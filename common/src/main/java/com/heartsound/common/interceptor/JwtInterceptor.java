@@ -21,8 +21,8 @@ public class JwtInterceptor implements HandlerInterceptor {
             token = token.substring(7); // 去掉 "Bearer " 前缀
             if (JwtUtil.validateToken(token)) {
                 // Token 验证通过，继续请求
-//                Long userId = JwtUtil.getUserIdFromToken(token);
-//                UserContext.setUserId(userId);
+                Long userId = JwtUtil.getUserIdFromToken(token);
+                UserContext.setUserId(userId);
                 UserContext.setToken(token);
                 return true;
             } else {

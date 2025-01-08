@@ -19,6 +19,8 @@ public enum RCode implements IRCode {
 
     /* ──────────────────────────────────────────── 400 ────────────────────────────────────────────────*/
     BAD_REQUEST              ("40000", "错误的请求"),
+    INCONSISTENT_PASSWORD    ("40001", "两次密码不一致"),
+    INCORRECT_PASSWORD       ("40002", "密码错误"),
 
     TOO_MANY_REQUESTS        ("42901", "请求频繁, 请稍后再试"),
 
